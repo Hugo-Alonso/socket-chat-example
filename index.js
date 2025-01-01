@@ -8,6 +8,7 @@ const server = createServer(app);
 const io = new Server(server);
 
 const PORT = 3000;
+let socketNumber = 1
 const messageHistory = [];
 const users = new Map();
 
@@ -17,7 +18,8 @@ app.get('/', (req, res) => {
 
 
 io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
+    socketNumber++; // Incrementar el número de sockets al conectar
+    console.log(`A user connected. Total users: ${socketNumber}`);
 
     // Asignar un nombre de usuario único
     const username = `User${Math.floor(Math.random() * 1000)}`;
